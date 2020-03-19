@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "time.h": "c",
+        "bdatypes.h": "c",
+        "math.h": "c"
+    }
+}
