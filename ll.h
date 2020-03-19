@@ -20,7 +20,7 @@ int deleteAtStart(struct Node *head)
     int deletedData = deletedNode->data;
     head = head->next;
     free(deletedNode);
-    printf("\nDeleted entry = %d\n", deletedData);
+    // printf("\nDeleted entry = %d\n", deletedData);
     return deletedData;
 }
 

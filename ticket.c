@@ -1,13 +1,14 @@
 #include "ll.h"
 
+struct Node *init(int, int, int, struct Node **);
 void printWaitlist(struct Node *, int, int, int);
 void printCounters(int, struct Node **);
-void init(int counters, int, int, struct Node *, struct Node **);
+void serveCustomer(int, int, struct Node **);
+struct Node *getNewCustomers(int, int, struct Node **, struct Node *);
 
 int main()
 {
     int counters, capacity, rate, initialUserCount;
-    struct Node *waitlist;
     printf("Enter number of ticket counters: ");
     scanf("%d", &counters);
     printf("Enter the max. capacity of each counter: ");
@@ -25,11 +26,77 @@ int main()
         counters--;
     }
     // initial scenario
-    init(counters, capacity, initialUserCount, waitlist, counterQ);
+    struct Node *waitlist = init(counters, capacity, initialUserCount, counterQ);
+    serveCustomer(counters, rate, counterQ);
+    waitlist = getNewCustomers(counters, rate, counterQ, waitlist);
+
+    printCounters(counters, counterQ);
+    printWaitlist(waitlist, counters, capacity, initialUserCount);
+
+    // while (1)
+    // {
+    // char newCustomers;
+    // printf("Any new customers joining the line (Y/N)?");
+    // scanf("%c", &newCustomers);
+    // if (newCustomers == 'Y' || newCustomers == 'y')
+    // {
+    //     newCustomerCount;
+    //     printf("How many? ");
+    //     scanf("%d", &newCustomerCount);
+    //     for (int i = 0; i < counters; i++)
+    //     {
+    //         while (length(counterQ[i]) != capacity)
+    //         {
+    //             insertAtEnd(counterQ[i], );
+    //         }
+    //     }
+    // }
+    // else
+    // {
+    // }
+    // }
+    // }
 }
 
-void init(int counters, int capacity, int initialUserCount, struct Node *waitlist, struct Node **counterQ)
+// dequeue people from counter
+void serveCustomer(int counters, int rate, struct Node **counterQ)
 {
+    for (int i = 0; i < counters; i++)
+    {
+        for (int j = 0; j < rate; j++)
+        {
+            struct Node *temp = counterQ[i]->next;
+            deleteAtStart(counterQ[i]);
+            counterQ[i] = temp;
+        }
+        if (counterQ[i] == NULL)
+        {
+            printf("No customers in counter %d. Closing counter %d", i + 1, i + 1);
+        }
+    }
+}
+
+// enqueue customers dequeued from waitlist
+struct Node *getNewCustomers(int counters, int rate, struct Node **counterQ, struct Node *waitlist)
+{
+    for (int i = 0; i < counters; i++)
+    {
+        if (counterQ[i] != NULL)
+        {
+            for (int j = 0; j < rate; j++)
+            {
+                struct Node *temp = waitlist->next;
+                insertAtEnd(counterQ[i], deleteAtStart(waitlist));
+                waitlist = waitlist->next;
+            }
+        }
+    }
+    return waitlist;
+}
+
+struct Node *init(int counters, int capacity, int initialUserCount, struct Node **counterQ)
+{
+    struct Node *waitlist;
     for (int i = 0; i < counters; i++)
     {
         if (counters * capacity < initialUserCount)
@@ -50,11 +117,11 @@ void init(int counters, int capacity, int initialUserCount, struct Node *waitlis
     }
     printCounters(counters, counterQ);
     printWaitlist(waitlist, counters, capacity, initialUserCount);
+    return waitlist;
 }
 
 void printCounters(int counters, struct Node **counterQ)
 {
-
     for (int i = 0; i < counters; i++)
     {
         if (counterQ[i] == NULL)
