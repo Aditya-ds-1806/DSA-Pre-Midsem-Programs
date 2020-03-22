@@ -11,6 +11,7 @@ int main()
     scanf("%d", &rate);
     printf("Enter number of customers initially: ");
     scanf("%d", &initialUserCount);
+    checkInitialConditions(capacity, rate, initialUserCount);
 
     struct Counter *counterQ[counters];
     createCounters(counterQ);
