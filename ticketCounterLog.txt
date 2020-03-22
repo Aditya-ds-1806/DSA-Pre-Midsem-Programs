@@ -1,0 +1,64 @@
+Microsoft Windows [Version 10.0.18362.720]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+E:\Engineering\4th sem\DSA\sess_6>cd "e:\Engineering\4th sem\DSA\sess_6\" && gcc ticket.c -o ticket && "e:\Engineering\4th sem\DSA
+E:\Engineering\4th sem\DSA\sess_6>cd "e:\Engineering\4th sem\DSA\sess_6\" && gcc ticket.c -o ticket && "e:\Engineering\4th sem\DSA\sess_6\"ticket
+Enter number of ticket counters: 7
+Enter the max. capacity of each counter: 6
+Enter the rate at which customers are served: 3
+Enter number of customers initially: 60
+counter 1: 1 2 3 4 5 6
+counter 2: 7 8 9 10 11 12
+counter 3: 13 14 15 16 17 18
+counter 4: 19 20 21 22 23 24
+counter 5: 25 26 27 28 29 30
+counter 6: 31 32 33 34 35 36
+counter 1: 4 5 6 43 44 45
+counter 2: 10 11 12 46 47 48
+counter 3: 16 17 18 49 50 51
+counter 4: 22 23 24 52 53 54
+counter 5: 28 29 30 55 56 57
+counter 6: 34 35 36 58 59 60
+counter 7: 40 41 42
+waitlist: Empty
+
+Any new customers joining the line (1/0)? 1
+How many? 30
+No customers, closing counter 7
+counter 1: 43 44 45 61 62 63
+counter 2: 46 47 48 64 65 66
+counter 3: 49 50 51 67 68 69
+counter 4: 52 53 54 70 71 72
+counter 5: 55 56 57 73 74 75
+counter 6: 58 59 60 76 77 78
+waitlist: 79 80 81 82 83 84 85 86 87 88 89 90
+
+Any new customers joining the line (1/0)? 0
+counter 1: 61 62 63 79 80 81
+counter 2: 64 65 66 82 83 84
+counter 3: 67 68 69 85 86 87
+counter 4: 70 71 72 88 89 90
+counter 5: 73 74 75
+counter 6: 76 77 78
+waitlist: Empty
+
+Any new customers joining the line (1/0)? 0
+No customers, closing counter 5
+No customers, closing counter 6
+counter 1: 79 80 81
+counter 2: 82 83 84
+counter 3: 85 86 87
+counter 4: 88 89 90
+waitlist: Empty
+
+Any new customers joining the line (1/0)? 0
+No customers, closing counter 1
+No customers, closing counter 2
+No customers, closing counter 3
+No customers, closing counter 4
+
+E:\Engineering\4th sem\DSA\sess_6>
+
+
+
+
