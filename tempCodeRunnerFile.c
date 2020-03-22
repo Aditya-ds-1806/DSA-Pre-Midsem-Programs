@@ -1,8 +1,7 @@
-if (counters * capacity < initialUserCount)
-        {
-            waitlist = insertAtEnd(NULL, counters * capacity + 1);
-            for (int i = counters * capacity + 2; i <= initialUserCount; i++)
-            {
-                insertAtEnd(waitlist, i);
-            }
-        }
+void createCounters(struct Counter **);
+// void initializeCounters(struct Counter **, int, int);
+// void generateWaitlist(int);
+// void serveCustomers(struct Counter **, int);
+// void getNewCustomers(struct Counter **, int);
+// void printCounterStatus(struct Counter **);
+// void printWaitList();
