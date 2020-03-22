@@ -45,7 +45,7 @@ void print(struct Node *head)
     struct Node *currentNode = head;
     if (currentNode == NULL)
     {
-        printf("Nothing to print!\n");
+        printf("Empty\n");
     }
     else
     {
@@ -155,5 +155,27 @@ void printCounterStatus(struct Counter **counterQ)
         temp = counterQ[i]->head;
         printf("counter %d: ", i + 1);
         print(temp);
+    }
+}
+
+void checkInitialConditions(int capacity, int rate, int initialUserCount)
+{
+    if (counters <= 0 || capacity <= 0 || rate <= 0 || initialUserCount <= 0)
+    {
+        printf("Invalid entry/entries, please check your input\n");
+        exit(0);
+    }
+    else if (rate > capacity)
+    {
+        printf("Invalid rate entered!\n");
+        exit(0);
+    }
+    else
+    {
+        // remove unnecessary counters
+        while ((counters - 1) * capacity > initialUserCount)
+        {
+            counters--;
+        }
     }
 }
