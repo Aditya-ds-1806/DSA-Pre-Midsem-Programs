@@ -21,15 +21,9 @@ int main()
     while (counters > 0)
     {
         int newCustomersAreJoining;
-        serveCustomers(counterQ, rate);
-        getNewCustomers(counterQ, capacity);
-        printCounterStatus(counterQ);
-        printWaitList();
         printf("Any new customers joining the line (1/0)? ");
         scanf("%d", &newCustomersAreJoining);
-        if (!newCustomersAreJoining)
-            continue;
-        else if (newCustomersAreJoining)
+        if (newCustomersAreJoining)
         {
             int newCustomers;
             printf("How many? ");
@@ -44,7 +38,12 @@ int main()
                 token++;
             }
         }
-        else
+        else if (newCustomersAreJoining != 0)
             printf("Invalid choice!\n");
+
+        serveCustomers(counterQ, rate);
+        getNewCustomers(counterQ, capacity);
+        printCounterStatus(counterQ);
+        printWaitList();
     }
 }

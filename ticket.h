@@ -68,6 +68,26 @@ void createCounters(struct Counter **counterQ)
     }
 }
 
+void closeCounters(struct Counter **counterQ)
+{
+    int counterClone = counters;
+    for (int i = 0; i < counterClone; i++)
+    {
+        if (counterQ[i]->length == 0)
+        {
+            printf("No customers, closing counter %d\n", i + 1);
+            free(counterQ[i]);
+            counterQ[i] = NULL;
+            counters--;
+            if (counters == 0)
+            {
+                printf("All counters closed. Ending program\n");
+                exit(0);
+            }
+        }
+    }
+}
+
 void generateWaitlist(int initialUserCount)
 {
     while (token <= initialUserCount)
@@ -103,21 +123,17 @@ void serveCustomers(struct Counter **counterQ, int rate)
     int counterClone = counters;
     for (int i = 0; i < counterClone; i++)
     {
-        for (int j = 0; j < rate; j++)
+        int len;
+        if (rate <= counterQ[i]->length)
+            len = rate;
+        else
+            len = counterQ[i]->length;
+        for (int j = 0; j < len; j++)
         {
             struct Node *temp = counterQ[i]->head;
             counterQ[i]->head = counterQ[i]->head->next;
             counterQ[i]->length = counterQ[i]->length - 1;
             free(temp);
-            if (counterQ[i]->length == 0)
-            {
-                printf("No customers, closing counter %d\n", i + 1);
-                free(counterQ[i]);
-                counterQ[i] = NULL;
-                counters--;
-                if (counters == 0)
-                    exit(0);
-            }
         }
     }
 }
@@ -133,11 +149,12 @@ void getNewCustomers(struct Counter **counterQ, int capacity)
             temp = waitlist;
             newCustomer = waitlist->data;
             waitlist = waitlist->next;
-            insertAtEnd(counterQ[i]->head, newCustomer);
+            counterQ[i]->head = insertAtEnd(counterQ[i]->head, newCustomer);
             counterQ[i]->length = counterQ[i]->length + 1;
             free(temp);
         }
     }
+    closeCounters(counterQ);
 }
 
 void printWaitList()
@@ -149,12 +166,10 @@ void printWaitList()
 
 void printCounterStatus(struct Counter **counterQ)
 {
-    struct Node *temp;
     for (int i = 0; i < counters; i++)
     {
-        temp = counterQ[i]->head;
         printf("counter %d: ", i + 1);
-        print(temp);
+        print(counterQ[i]->head);
     }
 }
 
