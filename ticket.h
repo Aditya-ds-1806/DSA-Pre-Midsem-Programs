@@ -154,7 +154,6 @@ void getNewCustomers(struct Counter **counterQ, int capacity)
             free(temp);
         }
     }
-    closeCounters(counterQ);
 }
 
 void printWaitList()

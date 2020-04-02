@@ -43,6 +43,7 @@ int main()
 
         serveCustomers(counterQ, rate);
         getNewCustomers(counterQ, capacity);
+        closeCounters(counterQ);
         printCounterStatus(counterQ);
         printWaitList();
     }
